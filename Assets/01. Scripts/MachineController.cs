@@ -12,10 +12,11 @@ namespace Whack_A_Mole
         // 동작하는지 확인하기 위한 임시 InputAction들 (Random 로직 완성 후 수정 예정)
         private InputAction popUpAction;
         private InputAction hideAction;
-
         private bool isPopUp;
         private int index = -1; // 두더지 인덱스(선택된 두더지가 없음)
 
+        # region Unity Methods
+        
         private void Awake()
         {
             string popUpKey = machineSide == HandSide.Left ? "<Keyboard>/5" : "<Keyboard>/6";
@@ -47,8 +48,7 @@ namespace Whack_A_Mole
                     moles[i].HideInTheHole();
                 }
 
-                isPopUp = false;
-                index = -1;
+                DoneHide();
             }
         }
 
@@ -63,5 +63,14 @@ namespace Whack_A_Mole
             popUpAction.Dispose();
             hideAction.Dispose();
         }
+        
+        # endregion
+
+        public void DoneHide()
+        {
+            isPopUp = false;
+            index = -1;
+        }
+        
     }
 }
