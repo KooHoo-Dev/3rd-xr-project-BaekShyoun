@@ -9,9 +9,12 @@ namespace Whack_A_Mole
         [SerializeField] private HandSide machineSide;
         [SerializeField] private MoleController[] moles;
 
-        // 동작하는지 확인하기 위한 임시 InputAction들 (Random 로직 완성 후 삭제 예정)
+        // 동작하는지 확인하기 위한 임시 InputAction들 (Random 로직 완성 후 수정 예정)
         private InputAction popUpAction;
         private InputAction hideAction;
+
+        private bool isPopUp;
+        private int index = -1; // 두더지 인덱스(선택된 두더지가 없음)
 
         private void Awake()
         {
@@ -30,12 +33,11 @@ namespace Whack_A_Mole
 
         private void Update()
         {
-            if (popUpAction.WasPressedThisFrame())
+            if (popUpAction.WasPressedThisFrame() && isPopUp == false)
             {
-                for (int i = 0; i < moles.Length; i++)
-                {
-                    moles[i].PopUp();
-                }
+                index = UnityEngine.Random.Range(0, moles.Length);
+                moles[index].PopUp();
+                isPopUp = true;
             }
 
             if (hideAction.WasPressedThisFrame())
@@ -44,6 +46,9 @@ namespace Whack_A_Mole
                 {
                     moles[i].HideInTheHole();
                 }
+
+                isPopUp = false;
+                index = -1;
             }
         }
 
