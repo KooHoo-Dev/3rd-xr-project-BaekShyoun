@@ -150,6 +150,8 @@ Transform:
   m_Children:
   - {fileID: 4577261558385801629}
   - {fileID: 4577261558405213762}
+  - {fileID: 475657908374637515}
+  - {fileID: 6965286955133834034}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &615749186
@@ -497,6 +499,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7285858123275639846, guid: 724e0cdcc14bdaa4c8647506a7b87a1f, type: 3}
+--- !u!4 &475657908374637515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995912293977346417}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2, y: 1, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 593929073}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &867380746753776524
 Transform:
   m_ObjectHideFlags: 0
@@ -543,6 +560,26 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141398428786075180}
   m_Mesh: {fileID: 1294569570036609916, guid: 5cedce610ce516046a35909a89574171, type: 3}
+--- !u!1 &995912293977346417
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 475657908374637515}
+  - component: {fileID: 3546087511229564014}
+  - component: {fileID: 1644601682783989924}
+  - component: {fileID: 2670133963332041217}
+  - component: {fileID: 3546087511229564015}
+  m_Layer: 0
+  m_Name: Arcade_Hammer_Hammer_Built_1_4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1141398428561076723
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,6 +720,55 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7285858123275639846, guid: 724e0cdcc14bdaa4c8647506a7b87a1f, type: 3}
+--- !u!23 &1644601682783989924
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995912293977346417}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: cce6bd5ba54ebd6428e065b8b60930f9, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!4 &2468014617289554484
 Transform:
   m_ObjectHideFlags: 0
@@ -757,6 +843,28 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7285858123275639846, guid: 724e0cdcc14bdaa4c8647506a7b87a1f, type: 3}
+--- !u!64 &2670133963332041217
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995912293977346417}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -9140441845224059353, guid: 2fe27eaa7af3dd241bc5dcc4e8285503, type: 3}
 --- !u!64 &3179688322669033641
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -901,6 +1009,27 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &3546087511229564014
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995912293977346417}
+  m_Mesh: {fileID: 2906410722175527355, guid: 6c1f15224230c0e41aa8d2ac761c9c8c, type: 3}
+--- !u!114 &3546087511229564015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995912293977346417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3378bac1ac497e7459c53227ad3e6f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.HammerController
+  hammerSide: 0
 --- !u!1 &3555375337519935444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,7 +1307,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bcabc0a65ab845b96cea37757cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MoleController
-  machineSide: 0
+  moleSide: 0
+  hideDepth: 0.08
+  speed: 0.3
 --- !u!23 &4509873314480646280
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1240,7 +1371,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bcabc0a65ab845b96cea37757cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MoleController
-  machineSide: 1
+  moleSide: 1
+  hideDepth: 0.08
+  speed: 0.3
 --- !u!4 &4577261558385801629
 Transform:
   m_ObjectHideFlags: 0
@@ -1285,6 +1418,28 @@ Transform:
   - {fileID: 8117750240757031955}
   m_Father: {fileID: 593929073}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!64 &4845437231335219960
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773911388952086920}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -9140441845224059353, guid: 2fe27eaa7af3dd241bc5dcc4e8285503, type: 3}
 --- !u!4 &5152822076220035514
 Transform:
   m_ObjectHideFlags: 0
@@ -1485,6 +1640,14 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &6270822683867683991
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773911388952086920}
+  m_Mesh: {fileID: 2906410722175527355, guid: 6c1f15224230c0e41aa8d2ac761c9c8c, type: 3}
 --- !u!64 &6763103589216509957
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1571,6 +1734,7 @@ GameObject:
   - component: {fileID: 5929827042889496965}
   - component: {fileID: 3363882932826468804}
   - component: {fileID: 6763103589216509957}
+  - component: {fileID: 6902965631605445375}
   m_Layer: 0
   m_Name: Arcade_Hammer_1_1
   m_TagString: Untagged
@@ -1578,6 +1742,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6902965631605445375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6902965631605445374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26130ef762fa4526a25e62c8742b1a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MachineController
+  machineSide: 0
+  moles:
+  - {fileID: 8068090513743106954}
+  - {fileID: 8930772315340651345}
+  - {fileID: 4509873314097282904}
+  - {fileID: 9044988621424988100}
+  - {fileID: 7730200084204198620}
+  - {fileID: 8117750240641283021}
 --- !u!1 &6902965632132400417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,6 +1774,7 @@ GameObject:
   - component: {fileID: 5929827043201461850}
   - component: {fileID: 3363882932916135451}
   - component: {fileID: 6763103589528418266}
+  - component: {fileID: 6902965632132400418}
   m_Layer: 0
   m_Name: Arcade_Hammer_1_1
   m_TagString: Untagged
@@ -1597,6 +1782,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6902965632132400418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6902965632132400417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26130ef762fa4526a25e62c8742b1a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MachineController
+  machineSide: 1
+  moles:
+  - {fileID: 8068090513220338775}
+  - {fileID: 8930772315825532048}
+  - {fileID: 4509873314480646281}
+  - {fileID: 9044988621367891997}
+  - {fileID: 7730200084289572101}
+  - {fileID: 8117750240757031956}
 --- !u!1 &6936432413753816642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1637,6 +1842,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &6965286955133834034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773911388952086920}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2, y: 1, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 593929073}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &7708089611215586069
 Transform:
   m_ObjectHideFlags: 0
@@ -1728,7 +1948,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bcabc0a65ab845b96cea37757cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MoleController
-  machineSide: 0
+  moleSide: 0
+  hideDepth: 0.08
+  speed: 0.3
 --- !u!23 &7730200084289572100
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1790,7 +2012,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bcabc0a65ab845b96cea37757cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MoleController
-  machineSide: 1
+  moleSide: 1
+  hideDepth: 0.08
+  speed: 0.3
+--- !u!1 &7773911388952086920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6965286955133834034}
+  - component: {fileID: 6270822683867683991}
+  - component: {fileID: 8134212621692168285}
+  - component: {fileID: 4845437231335219960}
+  - component: {fileID: 8134212621692168286}
+  m_Layer: 0
+  m_Name: Arcade_Hammer_Hammer_Built_1_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!33 &7833693044090023774
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1883,7 +2127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bcabc0a65ab845b96cea37757cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MoleController
-  machineSide: 1
+  moleSide: 1
+  hideDepth: 0.08
+  speed: 0.3
 --- !u!1 &8068090513743106953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,7 +2162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bcabc0a65ab845b96cea37757cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MoleController
-  machineSide: 0
+  moleSide: 0
+  hideDepth: 0.08
+  speed: 0.3
 --- !u!4 &8117750240641283020
 Transform:
   m_ObjectHideFlags: 0
@@ -1944,7 +2192,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bcabc0a65ab845b96cea37757cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MoleController
-  machineSide: 0
+  moleSide: 0
+  hideDepth: 0.08
+  speed: 0.3
 --- !u!4 &8117750240757031955
 Transform:
   m_ObjectHideFlags: 0
@@ -1972,7 +2222,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bcabc0a65ab845b96cea37757cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MoleController
-  machineSide: 1
+  moleSide: 1
+  hideDepth: 0.08
+  speed: 0.3
+--- !u!23 &8134212621692168285
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773911388952086920}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a3b45d01ab66dbd41a9cae0ffaf48997, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8134212621692168286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773911388952086920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3378bac1ac497e7459c53227ad3e6f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.HammerController
+  hammerSide: 1
 --- !u!33 &8444903834109953083
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2148,7 +2462,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bcabc0a65ab845b96cea37757cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MoleController
-  machineSide: 0
+  moleSide: 0
+  hideDepth: 0.08
+  speed: 0.3
 --- !u!23 &8930772315825532047
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2210,7 +2526,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bcabc0a65ab845b96cea37757cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MoleController
-  machineSide: 1
+  moleSide: 1
+  hideDepth: 0.08
+  speed: 0.3
 --- !u!64 &9044988621367891996
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2245,7 +2563,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bcabc0a65ab845b96cea37757cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MoleController
-  machineSide: 1
+  moleSide: 1
+  hideDepth: 0.08
+  speed: 0.3
 --- !u!64 &9044988621424988099
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2280,7 +2600,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bcabc0a65ab845b96cea37757cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.MoleController
-  machineSide: 0
+  moleSide: 0
+  hideDepth: 0.08
+  speed: 0.3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
