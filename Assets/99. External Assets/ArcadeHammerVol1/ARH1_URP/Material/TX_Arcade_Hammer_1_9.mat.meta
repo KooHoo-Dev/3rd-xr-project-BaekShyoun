@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1564d1125d05a8941a7f2cdb8526a209
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 384632
+  packageName: Arcade Hammer Vol. 1
+  packageVersion: 1.0.0
+  assetPath: Assets/ArcadeHammerVol1/ARH1_URP/Material/TX_Arcade_Hammer_1_9.mat
+  uploadId: 927600
