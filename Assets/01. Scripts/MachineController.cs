@@ -1,7 +1,9 @@
+using System.Diagnostics;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Debug = UnityEngine.Debug;
 
 namespace Whack_A_Mole
 {
@@ -97,9 +99,14 @@ namespace Whack_A_Mole
             DoneHide();
         }
 
-        public void GetHideOne()
+        private void GetHideOne()
         {
             moles[index].HideInTheHole();
+            // 시간내로 두더지 못잡았을 때 나오는 로직이므로, 하트 개수를 깎는다.
+            --GameManager.Instance.maxHearts;
+            Debug.Log($"현재 하트 개수 : {GameManager.Instance.maxHearts}");
+            if (GameManager.Instance.maxHearts == 0)
+                GameManager.Instance.EndGame();
         }
         
         // 두더지 상태 초기화

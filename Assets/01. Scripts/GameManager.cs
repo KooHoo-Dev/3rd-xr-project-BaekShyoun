@@ -7,6 +7,9 @@ namespace Whack_A_Mole
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
+
+        public int score = 0;
+        public int maxHearts = 3;
         
         [SerializeField] private MachineController leftMachine;
         [SerializeField] private MachineController rightMachine;
@@ -21,6 +24,7 @@ namespace Whack_A_Mole
         
         public async UniTaskVoid RepeatGame()
         {
+            await UniTask.WaitForSeconds(3f);
             while (canPlay)
             {
                 MachineController targetMachine = isLeft ? leftMachine : rightMachine;
@@ -28,6 +32,11 @@ namespace Whack_A_Mole
                 await targetMachine.StartGame();
                 isLeft = !isLeft;
             }
+        }
+
+        public void EndGame()
+        {
+            Debug.Log("겜 오버ㅇㅇ");
         }
     }
 }

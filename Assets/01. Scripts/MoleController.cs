@@ -24,7 +24,6 @@ namespace Whack_A_Mole
         private Vector3 raisedPosition; // 두더지가 올라온 위치
         private Vector3 targetPosition; // 두더지가 이동할 목표 지점
         private bool isHide; // 두더지가 현재 숨은 상태인지 아닌지
-        public bool isHit { get; private set; } // 두더지 맞았는지
 
         private void Awake()
         {
@@ -33,7 +32,6 @@ namespace Whack_A_Mole
             raisedPosition = transform.localPosition;
             HideInTheHole(); // 일단 숨고 시작
             transform.localPosition = targetPosition;
-            isHit = false;
         }
 
         private void Update()
@@ -74,7 +72,8 @@ namespace Whack_A_Mole
                 return;
             }
             Debug.Log($"{name}에 {collision.gameObject.name} 충돌함");
-            isHit = true;
+            GameManager.Instance.score += 100; // 하드코딩. 추후 밸런스 조정 필요.
+            Debug.Log($"점수 {GameManager.Instance.score}");
             HideInTheHole();
         }
 

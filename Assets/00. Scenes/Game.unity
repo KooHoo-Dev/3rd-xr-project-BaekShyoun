@@ -1513,9 +1513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 949b3766bf424387896b3bde91e75048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.UIController
-  machine:
-  - {fileID: 4577261558385801630}
-  - {fileID: 4577261558405213763}
   announceText: {fileID: 1809205091}
   gameStartButton: {fileID: 1334288246}
   announceDuration: 3
@@ -1700,6 +1697,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94b7b287073438ea0f35cf8760d88ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Whack_A_Mole.GameManager
+  score: 0
+  maxHearts: 3
   leftMachine: {fileID: 4577261558385801630}
   rightMachine: {fileID: 4577261558405213763}
 --- !u!4 &1693575808
