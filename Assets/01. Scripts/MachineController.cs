@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,16 +16,27 @@ namespace Whack_A_Mole
         private InputAction hideAction;
         private bool isPopUp;
         private int index = -1; // 두더지 인덱스(선택된 두더지가 없음)
+        
+        private CancellationToken destroyToken;
+        [SerializeField] private float popUpDuration = 3f;
+
+        // 추후 반복문 탈출 조건(하트) 만들 거임
+        private bool canPlay = true;
 
         # region Unity Methods
         
         private void Awake()
         {
-            string popUpKey = machineSide == HandSide.Left ? "<Keyboard>/5" : "<Keyboard>/6";
-            popUpAction = new InputAction("PopUp", InputActionType.Button, popUpKey);
-            string hideKey = machineSide == HandSide.Left ? "<Keyboard>/7" : "<Keyboard>/8";
-            hideAction = new InputAction("Hide", InputActionType.Button, hideKey);
-
+            destroyToken = this.GetCancellationTokenOnDestroy();
+            
+            // 디버그용
+            {
+                string popUpKey = machineSide == HandSide.Left ? "<Keyboard>/5" : "<Keyboard>/6";
+                popUpAction = new InputAction("PopUp", InputActionType.Button, popUpKey);
+                string hideKey = machineSide == HandSide.Left ? "<Keyboard>/7" : "<Keyboard>/8";
+                hideAction = new InputAction("Hide", InputActionType.Button, hideKey);
+            }
+            
         }
 
         private void OnEnable()
@@ -34,21 +47,17 @@ namespace Whack_A_Mole
 
         private void Update()
         {
-            if (popUpAction.WasPressedThisFrame() && isPopUp == false)
+            // 디버그용
             {
-                index = UnityEngine.Random.Range(0, moles.Length);
-                moles[index].PopUp();
-                isPopUp = true;
-            }
-
-            if (hideAction.WasPressedThisFrame())
-            {
-                for (int i = 0; i < moles.Length; i++)
+                if (popUpAction.WasPressedThisFrame())
                 {
-                    moles[i].HideInTheHole();
+                    RandomPopUp();
                 }
 
-                DoneHide();
+                if (hideAction.WasPressedThisFrame())
+                {
+                    GetHideAll();
+                }
             }
         }
 
@@ -66,11 +75,52 @@ namespace Whack_A_Mole
         
         # endregion
 
+        # region PopUp & Hide
+
+        public void RandomPopUp()
+        {
+            if (isPopUp) return;
+            index = UnityEngine.Random.Range(0, moles.Length);
+            moles[index].PopUp();
+            isPopUp = true;
+        }
+
+        private void GetHideAll()
+        {
+            for (int i = 0; i < moles.Length; i++)
+            {
+                moles[i].HideInTheHole();
+            }
+            DoneHide();
+        }
+
+        public void GetHideOne()
+        {
+            moles[index].HideInTheHole();
+        }
+        
+        // 두더지 상태 초기화
         public void DoneHide()
         {
             isPopUp = false;
             index = -1;
         }
         
+        public async UniTaskVoid RepeatGame()
+        {
+            while (canPlay)
+            {
+                await StartGame();
+            }
+        }
+        
+        private async UniTask StartGame()
+        {
+            if (destroyToken.IsCancellationRequested) return;
+            RandomPopUp();
+            await UniTask.WaitForSeconds(popUpDuration, cancellationToken: destroyToken);
+            if (index != -1) GetHideOne();
+        }
+        # endregion
     }
 }
