@@ -10,7 +10,6 @@ namespace Whack_A_Mole
     {
         public static UIController Instance;
 
-        [SerializeField] private MachineController[] machine;
         [SerializeField] private TMP_Text announceText;
         [SerializeField] private Button gameStartButton;
         [SerializeField] private float announceDuration = 3f;
@@ -56,10 +55,7 @@ namespace Whack_A_Mole
         {
             Debug.Log("게임 시작");
             gameStartButton.gameObject.SetActive(false);
-            for (int i = 0; i < machine.Length; i++)
-            {
-                machine[i].RepeatGame().Forget();
-            }
+            GameManager.Instance.RepeatGame().Forget();
         }
         
         

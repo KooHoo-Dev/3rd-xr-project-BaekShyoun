@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -8,7 +7,7 @@ namespace Whack_A_Mole
 {
     public class MachineController : MonoBehaviour
     {
-        [SerializeField] private HandSide machineSide;
+        public HandSide machineSide;
         [SerializeField] private MoleController[] moles;
 
         // 동작하는지 확인하기 위한 임시 InputAction들 (Random 로직 완성 후 수정 예정)
@@ -20,8 +19,6 @@ namespace Whack_A_Mole
         private CancellationToken destroyToken;
         [SerializeField] private float popUpDuration = 3f;
 
-        // 추후 반복문 탈출 조건(하트) 만들 거임
-        private bool canPlay = true;
 
         # region Unity Methods
         
@@ -77,14 +74,20 @@ namespace Whack_A_Mole
 
         # region PopUp & Hide
 
-        public void RandomPopUp()
+        // 추가해야 할 로직
+        // 1. Left면 return시키고서 Right만 실행시키기
+        // 2. Right면 return 시키고서 Right만 실행시키기
+        // 3. 1번과 2번이 반복하게 하기
+        
+        private void RandomPopUp()
         {
             if (isPopUp) return;
-            index = UnityEngine.Random.Range(0, moles.Length);
+            index = Random.Range(0, moles.Length);
             moles[index].PopUp();
             isPopUp = true;
         }
 
+        // 디버깅용이라 추후 삭제해도 될듯
         private void GetHideAll()
         {
             for (int i = 0; i < moles.Length; i++)
@@ -106,15 +109,7 @@ namespace Whack_A_Mole
             index = -1;
         }
         
-        public async UniTaskVoid RepeatGame()
-        {
-            while (canPlay)
-            {
-                await StartGame();
-            }
-        }
-        
-        private async UniTask StartGame()
+        public async UniTask StartGame()
         {
             if (destroyToken.IsCancellationRequested) return;
             RandomPopUp();

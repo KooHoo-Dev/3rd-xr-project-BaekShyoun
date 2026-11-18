@@ -17,7 +17,7 @@ namespace Whack_A_Mole
         // ++ 현재 소속된 오락기가 왼쪽 오락기인지 오른쪽 오락기인지 Enum으로 설정 가능하게 한다.
         // 일단 오른쪽 뜨면 그 다음에는 왼쪽이 뜨게 하는 방식을 고려 중(번갈아 뜨게) - 추후 밸런스 잡으며 수정
 
-        [SerializeField] private HandSide moleSide; // 어느쪽 기계에 있는 두더지인지 분류
+        public HandSide moleSide; // 어느쪽 기계에 있는 두더지인지 분류
         [SerializeField] private float hideDepth = 0.15f; // 두더지가 내려갈 높이
         [SerializeField] private float speed = 0.3f; // 두더지가 오르내리는 스피드
         private MachineController machine; // isPopUp과 index 초기화용
