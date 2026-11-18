@@ -97,8 +97,7 @@ namespace Whack_A_Mole
                 return;
             }
             Debug.Log($"{name}에 {collision.gameObject.name} 충돌함");
-            GameManager.Instance.score += 100; // 하드코딩. 추후 밸런스 조정 필요.
-            Debug.Log($"점수 {GameManager.Instance.score}");
+            GameManager.Instance.HitMole();
             HideInTheHole();
         }
 

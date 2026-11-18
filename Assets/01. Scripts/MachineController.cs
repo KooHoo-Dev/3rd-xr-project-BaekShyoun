@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,9 +12,6 @@ namespace Whack_A_Mole
         // 동작하는지 확인하기 위한 임시 InputAction들 (Random 로직 완성 후 수정 예정)
         private InputAction popUpAction;
         private InputAction hideAction;
-        
-        private CancellationToken destroyToken;
-        [SerializeField] private float popUpDuration = 3f;
 
         // 현재 Hide 상태인 두더지 인덱스 저장 ( PopUp 시킬 인덱스 목록 )
         private List<int> hiddenIndices = new List<int>();
@@ -25,8 +20,6 @@ namespace Whack_A_Mole
         
         private void Awake()
         {
-            destroyToken = this.GetCancellationTokenOnDestroy();
-            
             // 디버그용
             {
                 string popUpKey = machineSide == HandSide.Left ? "<Keyboard>/5" : "<Keyboard>/6";
@@ -109,11 +102,9 @@ namespace Whack_A_Mole
             }
         }
         
-        public async UniTask StartGame()
+        public void StartGame()
         {
-            if (destroyToken.IsCancellationRequested) return;
             RandomPopUp();
-            await UniTask.WaitForSeconds(popUpDuration, cancellationToken: destroyToken);
         }
         # endregion
     }
