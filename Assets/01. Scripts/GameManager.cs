@@ -34,8 +34,19 @@ namespace Whack_A_Mole
             }
         }
 
+        // 두더지 놓침 (하트 깎기)
+        public void MissMole()
+        {
+            if (canPlay == false) return;
+            --maxHearts;
+            Debug.Log($"현재 하트 개수 : {maxHearts}");
+
+            if (maxHearts <= 0) EndGame();
+        }
+
         public void EndGame()
         {
+            canPlay = false;
             Debug.Log("겜 오버ㅇㅇ");
         }
     }

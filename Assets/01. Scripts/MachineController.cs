@@ -1,9 +1,8 @@
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Debug = UnityEngine.Debug;
 
 namespace Whack_A_Mole
 {
@@ -15,12 +14,12 @@ namespace Whack_A_Mole
         // 동작하는지 확인하기 위한 임시 InputAction들 (Random 로직 완성 후 수정 예정)
         private InputAction popUpAction;
         private InputAction hideAction;
-        private bool isPopUp;
-        private int index = -1; // 두더지 인덱스(선택된 두더지가 없음)
         
         private CancellationToken destroyToken;
         [SerializeField] private float popUpDuration = 3f;
 
+        // 현재 Hide 상태인 두더지 인덱스 저장 ( PopUp 시킬 인덱스 목록 )
+        private List<int> hiddenIndices = new List<int>();
 
         # region Unity Methods
         
@@ -75,18 +74,30 @@ namespace Whack_A_Mole
         # endregion
 
         # region PopUp & Hide
-
-        // 추가해야 할 로직
-        // 1. Left면 return시키고서 Right만 실행시키기
-        // 2. Right면 return 시키고서 Right만 실행시키기
-        // 3. 1번과 2번이 반복하게 하기
         
         private void RandomPopUp()
         {
-            if (isPopUp) return;
-            index = Random.Range(0, moles.Length);
+            // 기존에 모아둔 Hide중인 두더지 인덱스를 비움.
+            hiddenIndices.Clear();
+
+            // Hide중인 두더지의 인덱스를 저장
+            for (int i = 0; i < moles.Length; i++)
+            {
+                if (moles[i].IsHide)
+                {
+                    hiddenIndices.Add(i);
+                }
+            }
+
+            // 모두 나와있다면 더 꺼낼 두더지가 없으므로 return
+            if (hiddenIndices.Count == 0) return;
+            
+            // 숨어있는 두더지 인덱스 중 어떤 인덱스를 뽑을지 고른다
+            int randIndex = Random.Range(0, hiddenIndices.Count);
+            // 해당 인덱스에 지정된 실제 두더지의 인덱스를 가져옴(moles의 인덱스)
+            int index = hiddenIndices[randIndex];
+            
             moles[index].PopUp();
-            isPopUp = true;
         }
 
         // 디버깅용이라 추후 삭제해도 될듯
@@ -96,24 +107,6 @@ namespace Whack_A_Mole
             {
                 moles[i].HideInTheHole();
             }
-            DoneHide();
-        }
-
-        private void GetHideOne()
-        {
-            moles[index].HideInTheHole();
-            // 시간내로 두더지 못잡았을 때 나오는 로직이므로, 하트 개수를 깎는다.
-            --GameManager.Instance.maxHearts;
-            Debug.Log($"현재 하트 개수 : {GameManager.Instance.maxHearts}");
-            if (GameManager.Instance.maxHearts == 0)
-                GameManager.Instance.EndGame();
-        }
-        
-        // 두더지 상태 초기화
-        public void DoneHide()
-        {
-            isPopUp = false;
-            index = -1;
         }
         
         public async UniTask StartGame()
@@ -121,7 +114,6 @@ namespace Whack_A_Mole
             if (destroyToken.IsCancellationRequested) return;
             RandomPopUp();
             await UniTask.WaitForSeconds(popUpDuration, cancellationToken: destroyToken);
-            if (index != -1) GetHideOne();
         }
         # endregion
     }
