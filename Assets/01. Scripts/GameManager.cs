@@ -1,4 +1,4 @@
-﻿using System.Threading;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -8,11 +8,15 @@ namespace Whack_A_Mole
     {
         public static GameManager Instance;
 
+        // 정상 타격 시 환경 효과에 알림
+        public event System.Action MoleHit;
+
         public int score = 0;
         public int maxHearts = 3;
         
         [SerializeField] private MachineController leftMachine;
         [SerializeField] private MachineController rightMachine;
+        [SerializeField] private GameReadyController gameReadyController;
         [SerializeField] private float startSpawnTime = 3f; // 처음 등장 시간
         [SerializeField] private float minSpawnTime = 0.5f; // 최소 등장 시간
         [SerializeField] private float decreaseTime = 0.05f; // 5콤보마다 점점 짧아지는 간격
@@ -22,7 +26,10 @@ namespace Whack_A_Mole
         private int combo;
         
         private bool isLeft;
-        private bool canPlay = true; // 반복문 탈출 조건
+        private bool canPlay; // 카운트다운이 끝난 뒤에만 타격/실패 처리
+        public bool IsPlaying => canPlay;
+        private bool hasStarted;
+        private bool hasEnded;
 
         private CancellationToken destroyToken;
         
@@ -47,8 +54,14 @@ namespace Whack_A_Mole
 
         public async UniTaskVoid RepeatGame()
         {
-            // 준비시간 3초
-            await UniTask.WaitForSeconds(3f, cancellationToken: destroyToken);
+            // 중복 클릭으로 게임 루프가 여러 개 생기지 않도록 방지
+            if (hasStarted || hasEnded) return;
+            hasStarted = true;
+            await gameReadyController.WaitUntilReady();
+            if (hasEnded) return;
+            await UIController.Instance.ShowCountdown();
+            if (hasEnded) return;
+            canPlay = true;
             
             while (canPlay)
             {
@@ -68,6 +81,7 @@ namespace Whack_A_Mole
             if (canPlay == false) return;
 
             score += 100;
+            MoleHit?.Invoke();
             combo++;
 
             // 5콤보마다 속도 증가
@@ -91,14 +105,23 @@ namespace Whack_A_Mole
             RefreshHUD();
             Debug.Log($"현재 하트 개수 : {maxHearts}");
 
-            // 잠시 꺼둠
-            // if (maxHearts <= 0) EndGame();
+            if (maxHearts <= 0) EndGame();
         }
 
         public void EndGame()
         {
+            if (hasEnded) return;
+            hasEnded = true;
+            gameReadyController.CancelReady();
             canPlay = false;
-            Debug.Log("겜 오버ㅇㅇ");
+            // 남아 있는 두더지도 숨겨 이전 타이머의 실패 처리를 막음.
+            foreach (var mole in FindObjectsByType<MoleController>(FindObjectsSortMode.None))
+                mole.HideInTheHole();
+            UIController.Instance.ShowGameOver();
+            Debug.Log("Game Over!");
         }
     }
 }
+
+
+

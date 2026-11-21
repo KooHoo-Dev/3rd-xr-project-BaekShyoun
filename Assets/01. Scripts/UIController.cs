@@ -17,6 +17,8 @@ namespace Whack_A_Mole
         [SerializeField] private TMP_Text scoreText;
         [SerializeField] private TMP_Text comboText;
         [SerializeField] private Image[] heartImages;
+        [SerializeField] private TMP_Text centerMessageText;
+        private bool isGameOver;
         private CancellationToken destroyToken;
         private bool isShowing;
         
@@ -26,6 +28,7 @@ namespace Whack_A_Mole
             Instance = this;
             destroyToken = this.GetCancellationTokenOnDestroy();
             ShowAnnounceText(false);
+            centerMessageText.gameObject.SetActive(false);
             gameStartButton.gameObject.SetActive(true);
         }
         
@@ -34,8 +37,8 @@ namespace Whack_A_Mole
         // 게임 시작, 타격 성공, 놓침 때 현재 값을 화면에 반영
         public void RefreshHUD(int score, int combo, int hearts)
         {
-            if (scoreText != null) scoreText.SetText("점수 {0}", score);
-            if (comboText != null) comboText.SetText("콤보 {0}", combo);
+            if (scoreText != null) scoreText.SetText("{0}", score);
+            if (comboText != null) comboText.SetText("{0}", combo);
 
             if (heartImages == null) return;
             int remaining = Mathf.Clamp(hearts, 0, heartImages.Length);
@@ -58,7 +61,7 @@ namespace Whack_A_Mole
         // 망치의 방향이 잘못됐을 때 출력되는 안내 Text
         public async UniTaskVoid ShowWrongSideAnnounce()
         {
-            if (isShowing) return;
+            if (isShowing || isGameOver) return;
 
             isShowing = true;
             ShowAnnounceText(true, "올바른 방향의 망치를 잡으세요.");
@@ -66,6 +69,39 @@ namespace Whack_A_Mole
             await UniTask.WaitForSeconds(announceDuration, cancellationToken: destroyToken);
             ShowAnnounceText(false);
             isShowing = false;
+        }
+        // 준비 안내도 카운트다운과 같은 중앙 텍스트 사용.
+        public void ShowCenterMessage(string message)
+        {
+            centerMessageText.color = new Color(0.22f, 0.87f, 1f);
+            centerMessageText.SetText(message);
+            centerMessageText.gameObject.SetActive(true);
+        }
+
+        // 카운트다운과 시작/종료 문구는 같은 TMP 텍스트를 재사용.
+        public async UniTask ShowCountdown()
+        {
+            centerMessageText.gameObject.SetActive(true);
+            centerMessageText.color = new Color(0.22f, 0.87f, 1f);
+            for (int count = 3; count > 0; count--)
+            {
+                if (isGameOver) return;
+                centerMessageText.SetText("{0}", count);
+                await UniTask.WaitForSeconds(1f, cancellationToken: destroyToken);
+            }
+            if (isGameOver) return;
+            centerMessageText.SetText("Game Start!");
+            await UniTask.WaitForSeconds(0.8f, cancellationToken: destroyToken);
+            if (!isGameOver) centerMessageText.gameObject.SetActive(false);
+        }
+
+        public void ShowGameOver()
+        {
+            isGameOver = true;
+            ShowAnnounceText(false);
+            centerMessageText.color = new Color(1f, 0.35f, 0.55f);
+            centerMessageText.SetText("Game Over!");
+            centerMessageText.gameObject.SetActive(true);
         }
         # endregion
         
@@ -83,3 +119,5 @@ namespace Whack_A_Mole
         # endregion
     }
 }
+
+

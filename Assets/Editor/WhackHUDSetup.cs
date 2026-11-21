@@ -103,18 +103,21 @@ public static class WhackHUDSetup
         for (int i = 0; i < hearts.Length; i++) hearts[i] = (Image)array.GetArrayElementAtIndex(i).objectReferenceValue;
         var comboField = typeof(GameManager).GetField("combo", BindingFlags.NonPublic | BindingFlags.Instance);
         var timeField = typeof(GameManager).GetField("currentSpawnTime", BindingFlags.NonPublic | BindingFlags.Instance);
+        var playField = typeof(GameManager).GetField("canPlay", BindingFlags.NonPublic | BindingFlags.Instance);
+        var oldPlay = playField.GetValue(gm);
         int oldScore = gm.score, oldHearts = gm.maxHearts;
         var oldCombo = comboField.GetValue(gm);
         var oldTime = timeField.GetValue(gm);
         try
         {
+            playField.SetValue(gm, true);
             gm.score = 0;
             gm.maxHearts = 3;
             comboField.SetValue(gm, 0);
             for (int i = 0; i < 5; i++) gm.HitMole();
-            if (score.text != "점수 500" || combo.text != "콤보 5") throw new Exception("Hit HUD values mismatch.");
+            if (score.text != "500" || combo.text != "5") throw new Exception("Hit HUD values mismatch.");
             gm.MissMole();
-            if (combo.text != "콤보 0" || score.text != "점수 500" || hearts[2].color == Color.white || hearts[0].color != Color.white)
+            if (combo.text != "0" || score.text != "500" || hearts[2].color == Color.white || hearts[0].color != Color.white)
                 throw new Exception("Miss HUD values mismatch.");
             ui.RefreshHUD(500, 0, -2);
             foreach (var heart in hearts) if (heart.color == Color.white) throw new Exception("Negative-heart display mismatch.");
@@ -122,6 +125,7 @@ public static class WhackHUDSetup
         }
         finally
         {
+            playField.SetValue(gm, oldPlay);
             gm.score = oldScore;
             gm.maxHearts = oldHearts;
             comboField.SetValue(gm, oldCombo);

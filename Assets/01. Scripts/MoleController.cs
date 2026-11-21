@@ -21,6 +21,7 @@ namespace Whack_A_Mole
         [SerializeField] private float hideDepth = 0.15f; // 두더지가 내려갈 높이
         [SerializeField] private float speed = 0.3f; // 두더지가 오르내리는 스피드
         [SerializeField] private float popUpDuration = 3f; // 두더지가 나온 뒤 자동으로 숨기까지 시간
+        private MoleHitVFX hitVFX;
         private Vector3 raisedPosition; // 두더지가 올라온 위치
         private Vector3 targetPosition; // 두더지가 이동할 목표 지점
         private bool isHide; // 두더지가 현재 숨은 상태인지 아닌지
@@ -34,6 +35,7 @@ namespace Whack_A_Mole
         private void Awake()
         {
             destroyToken = this.GetCancellationTokenOnDestroy();
+            hitVFX = GetComponent<MoleHitVFX>();
             // 두더지가 올라와야 할 위치 저장
             raisedPosition = transform.localPosition;
             HideInTheHole(); // 일단 숨고 시작
@@ -89,6 +91,7 @@ namespace Whack_A_Mole
             if (collision.gameObject.CompareTag("Hammer") == false) return;
             // 두더지가 숨어 있으면 반환
             if (isHide) return;
+            if (GameManager.Instance.IsPlaying == false) return;
             // Hammer와 Mole의 방향이 다르면 반환
             HammerController hammer = collision.gameObject.GetComponent<HammerController>();
             if (moleSide != hammer.hammerSide)
@@ -98,8 +101,10 @@ namespace Whack_A_Mole
             }
             Debug.Log($"{name}에 {collision.gameObject.name} 충돌함");
             GameManager.Instance.HitMole();
+            if (hitVFX != null) hitVFX.PlayHit();
             HideInTheHole();
         }
 
 }
 }
+

@@ -1,0 +1,41 @@
+NeonHammerGame (URP) - ArcadeHammerVol1 교체용 에셋
+=====================================================
+
+[설치]
+1. NeonHammerGame 폴더(와 NeonHammerGame.meta)를 프로젝트의 Assets 아래로 복사합니다.
+   (ArcadeHammerVol1 옆, 예: Assets/NeonHammerGame)
+2. 임포트가 끝나면 Prefabs 폴더와 프리팹 2개가 자동으로 만들어집니다.
+     Prefabs/NH_Arcade_Hammer_URP.prefab         (게임기 + 두더지 6개)
+     Prefabs/NH_Arcade_Hammer_Hammer_URP.prefab  (망치)
+   자동으로 안 생기면: 메뉴 Tools > Neon Hammer Game > Build Prefabs
+3. 씬 교체: 씬을 열고 메뉴 Tools > Neon Hammer Game > Replace ArcadeHammerVol1 Prefabs In Open Scenes
+   - 씬에 있는 ArcadeHammerVol1 게임기/망치 프리팹이 같은 위치·회전·스케일로 교체됩니다.
+   - Unity 2022.2 이상에서는 인스턴스에 직접 붙인 컴포넌트(내 스크립트 등)가 이름 기준으로 유지됩니다.
+   - 교체 후 씬을 저장하세요. (Ctrl+Z로 되돌릴 수 있습니다)
+4. 네온 번짐: URP Volume에 Bloom을 켜세요 (Threshold 1, Intensity 1 정도부터).
+
+[구조 - ArcadeHammerVol1과 동일]
+- Meshes/NH_Arcade_Hammer_1_1.fbx
+    Arcade_Hammer_1_1            게임기 본체
+    Arcade_Hammer_Mole_1_1 ~ 1_6 두더지 (1_1~1_3 뒷줄 좌->우, 1_4~1_6 앞줄 좌->우)
+- Meshes/NH_Arcade_Hammer_Hammer_1_1.fbx
+    Arcade_Hammer_Hammer_1_1     망치 (피벗 = 바운딩박스 중심, 원본과 동일)
+- Collision/*.fbx                MeshCollider용 저폴리 충돌 메시 (원본처럼 non-convex)
+- 프리팹 = FBX 모델의 Prefab Variant + 재질 + MeshCollider (원본 프리팹과 같은 방식, 스크립트 없음)
+
+[크기 (Unity 단위 m)]
+- 게임기: 폭 1.14 x 깊이 0.93 x 높이 1.68 (구멍 간격 0.28, 플레이면 높이 약 1.05~1.12 = 원본과 거의 동일)
+- 두더지: 지름 0.16 (원본과 동일), 높이 0.35, 피벗 = 바닥 중심
+  기본 위치 = 원본처럼 머리가 구멍 테두리보다 9cm 위로 나온 상태.
+  구멍은 수직(월드 Y축)이라 원본처럼 두더지를 위/아래(Y)로만 움직이면 됩니다.
+  아래로 약 0.11m 내리면 완전히 숨고, 위로 0.20m까지 올려도 벽과 겹치지 않습니다.
+- 망치: 머리 폭 0.33, 전체 길이 0.58, 손잡이 굵기 0.058 (원본과 동일)
+
+[최적화]
+- 게임기+두더지: 재질 1개(NH_Neon_Palette, 16px 팔레트 텍스처 3장) -> 드로우콜 최소화
+- 삼각형: 게임기 약 1.2만, 두더지 1개 약 3.6천(6개 약 2.1만), 망치 3천
+- 망치: 재질 1개(NH_BlueHammer: 베이스/노멀/이미시브 1024)
+
+[참고]
+- URP 전용입니다 (Built-in 재질 없음).
+- 원본 ArcadeHammerVol1 에셋은 수정하지 않습니다. 교체가 끝나면 원본은 지워도 됩니다.
