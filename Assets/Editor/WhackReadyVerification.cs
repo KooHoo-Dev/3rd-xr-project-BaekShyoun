@@ -39,7 +39,13 @@ public static class WhackReadyVerification
     static void MoveHead(Vector3 target){var delta=target-Camera.main.transform.position;delta.y=0;origin.position+=delta;}
     static void Next(int value){stage=value;time=Time.time;}
     static void Tick(){
-        if(!EditorApplication.isPlaying || !UIController.Instance || !GameManager.Instance)return;
+        if (!EditorApplication.isPlaying) return;
+        if (stage == 11 && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Ranking")
+        {
+            Debug.Log("READY_VERIFY_OK: grab lock, countdown, game over and Ranking scene transition passed.");
+            EditorApplication.update -= Tick; EditorApplication.isPlaying = false; return;
+        }
+        if (!UIController.Instance || !GameManager.Instance) return;
         try{
             var ui=UIController.Instance;var gm=GameManager.Instance;
             if(stage==0){

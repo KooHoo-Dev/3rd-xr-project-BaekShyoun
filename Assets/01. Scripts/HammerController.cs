@@ -11,6 +11,16 @@ namespace Whack_A_Mole
         private XRBaseInteractor holdingHand;
         private bool previousKeepSelected;
 
+        private void OnEnable()
+        {
+            GetComponent<XRGrabInteractable>().selectEntered.AddListener(OnGrab);
+        }
+
+        private void OnGrab(UnityEngine.XR.Interaction.Toolkit.SelectEnterEventArgs args)
+        {
+            SoundManager.Instance?.PlaySFX(SFXType.HammerGrab);
+        }
+
         public void LockGrab()
         {
             if (holdingHand != null) return;
@@ -39,6 +49,7 @@ namespace Whack_A_Mole
 
         private void OnDisable()
         {
+            GetComponent<XRGrabInteractable>().selectEntered.RemoveListener(OnGrab);
             UnlockGrab();
         }
     }

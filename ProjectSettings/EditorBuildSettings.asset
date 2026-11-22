@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 55daccc09a3b69647bbab145b54a3ab3
+    path: Assets/00. Scenes/Title.unity
+    guid: 0e293b505ef72c24dadf4524a1204e6c
+  - enabled: 1
+    path: Assets/00. Scenes/Game.unity
+    guid: bf5ee7bce2031244c81f71e2b1537ffe
+  - enabled: 1
+    path: Assets/00. Scenes/Ranking.unity
+    guid: b4b2af23a3470d5449a6bbaf4e90ae03
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 908d62378b8205449861e5838a18a596, type: 2}

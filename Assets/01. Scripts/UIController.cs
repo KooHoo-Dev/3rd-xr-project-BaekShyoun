@@ -86,10 +86,12 @@ namespace Whack_A_Mole
             for (int count = 3; count > 0; count--)
             {
                 if (isGameOver) return;
+                SoundManager.Instance?.PlaySFX(SFXType.Countdown);
                 centerMessageText.SetText("{0}", count);
                 await UniTask.WaitForSeconds(1f, cancellationToken: destroyToken);
             }
             if (isGameOver) return;
+            SoundManager.Instance?.PlaySFX(SFXType.GameStart);
             centerMessageText.SetText("Game Start!");
             await UniTask.WaitForSeconds(0.8f, cancellationToken: destroyToken);
             if (!isGameOver) centerMessageText.gameObject.SetActive(false);
@@ -110,6 +112,7 @@ namespace Whack_A_Mole
         // 버튼 누르면 게임 시작하게 만드는 임시 로직 (수정할수도 안할수도?)
         public void PressGameStart()
         {
+            SoundManager.Instance?.PlaySFX(SFXType.ButtonClick);
             Debug.Log("게임 시작");
             gameStartButton.gameObject.SetActive(false);
             GameManager.Instance.RepeatGame().Forget();

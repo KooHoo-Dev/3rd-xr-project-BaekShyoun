@@ -91,6 +91,7 @@ namespace Whack_A_Mole
             int index = hiddenIndices[randIndex];
             
             moles[index].PopUp();
+            SoundManager.Instance?.PlaySFX(SFXType.MolePopUp);
         }
 
         // 디버깅용이라 추후 삭제해도 될듯

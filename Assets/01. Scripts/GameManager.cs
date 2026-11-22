@@ -1,6 +1,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Whack_A_Mole
 {
@@ -24,6 +25,7 @@ namespace Whack_A_Mole
         // 현재 간격
         private float currentSpawnTime;
         private int combo;
+        private int bestCombo;
         
         private bool isLeft;
         private bool canPlay; // 카운트다운이 끝난 뒤에만 타격/실패 처리
@@ -83,6 +85,9 @@ namespace Whack_A_Mole
             score += 100;
             MoleHit?.Invoke();
             combo++;
+            bestCombo = Mathf.Max(bestCombo, combo);
+            SoundManager.Instance?.PlaySFX(SFXType.MoleHit);
+            if (combo % 10 == 0) SoundManager.Instance?.PlaySFX(SFXType.ComboStep);
 
             // 5콤보마다 속도 증가
             int speedLevel = combo / 5;
@@ -101,6 +106,7 @@ namespace Whack_A_Mole
             combo = 0;
             currentSpawnTime = startSpawnTime;
             
+            SoundManager.Instance?.PlaySFX(SFXType.MoleMiss);
             --maxHearts;
             RefreshHUD();
             Debug.Log($"현재 하트 개수 : {maxHearts}");
@@ -118,7 +124,16 @@ namespace Whack_A_Mole
             foreach (var mole in FindObjectsByType<MoleController>(FindObjectsSortMode.None))
                 mole.HideInTheHole();
             UIController.Instance.ShowGameOver();
+            SoundManager.Instance?.PlaySFX(SFXType.GameOver);
+            RecordManager.SaveRecord(score, bestCombo);
+            GoRankingAfterDelay().Forget();
             Debug.Log("Game Over!");
+        }
+        // Game Over 문구를 잠깐 보여준 뒤 기록 씬으로 이동.
+        private async UniTaskVoid GoRankingAfterDelay()
+        {
+            await UniTask.WaitForSeconds(2f, cancellationToken: destroyToken);
+            SceneManager.LoadScene("Ranking");
         }
     }
 }
