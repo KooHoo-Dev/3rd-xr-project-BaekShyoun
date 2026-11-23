@@ -20,7 +20,7 @@ namespace Whack_A_Mole
         [SerializeField] private GameReadyController gameReadyController;
         [SerializeField] private float startSpawnTime = 3f; // 처음 등장 시간
         [SerializeField] private float minSpawnTime = 0.5f; // 최소 등장 시간
-        [SerializeField] private float decreaseTime = 0.05f; // 5콤보마다 점점 짧아지는 간격
+        [SerializeField] private float decreaseTime = 0.15f; // 5콤보마다 점점 짧아지는 간격
 
         // 현재 간격
         private float currentSpawnTime;

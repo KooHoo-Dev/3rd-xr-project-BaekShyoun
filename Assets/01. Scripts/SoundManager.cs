@@ -42,8 +42,8 @@ namespace Whack_A_Mole
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            BGMVolume = Mathf.Clamp01(PlayerPrefs.GetFloat("NeonHammer.BGM", .5f));
-            SFXVolume = Mathf.Clamp01(PlayerPrefs.GetFloat("NeonHammer.SFX", .8f));
+            BGMVolume = Mathf.Clamp01(PlayerPrefs.GetFloat("NeonHammer.BGM", .25f));
+            SFXVolume = Mathf.Clamp01(PlayerPrefs.GetFloat("NeonHammer.SFX", .4f));
             bgmSource.volume = BGMVolume;
             sfxSource.volume = SFXVolume;
         }

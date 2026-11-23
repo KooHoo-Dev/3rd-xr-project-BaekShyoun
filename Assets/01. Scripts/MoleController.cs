@@ -84,27 +84,25 @@ namespace Whack_A_Mole
             GameManager.Instance.MissMole();
         }
 
-        // 두더지에 망치 접촉시 두더지 숨기
+        // 기존 물리 충돌도 같은 타격 함수로 연결.
         private void OnCollisionEnter(Collision collision)
         {
-            // Tag가 Hammer가 아니면 반환
-            if (collision.gameObject.CompareTag("Hammer") == false) return;
-            // 두더지가 숨어 있으면 반환
-            if (isHide) return;
-            if (GameManager.Instance.IsPlaying == false) return;
-            // Hammer와 Mole의 방향이 다르면 반환
-            HammerController hammer = collision.gameObject.GetComponent<HammerController>();
-            if (moleSide != hammer.hammerSide)
-            {
-                Debug.Log("잘못된 방향의 망치로 때렸습니다.");
-                return;
-            }
-            Debug.Log($"{name}에 {collision.gameObject.name} 충돌함");
-            GameManager.Instance.HitMole();
-            if (hitVFX != null) hitVFX.PlayHit();
-            HideInTheHole();
+            HammerController hammer = collision.gameObject.GetComponentInParent<HammerController>();
+            TryHit(hammer);
         }
 
-}
-}
+        // 물리 충돌과 SphereCast가 동시에 감지해도 한 번만 점수 처리.
+        public void TryHit(HammerController hammer)
+        {
+            if (hammer == null || !hammer.CompareTag("Hammer") || !hammer.IsHeld) return;
+            if (isHide) return;
+            if (GameManager.Instance == null || !GameManager.Instance.IsPlaying) return;
+            if (moleSide != hammer.hammerSide) return;
 
+            // 점수나 효과를 실행하기 전에 숨음 상태로 바꿔 중복 타격 방지.
+            HideInTheHole();
+            GameManager.Instance.HitMole();
+            if (hitVFX != null) hitVFX.PlayHit();
+        }
+    }
+}

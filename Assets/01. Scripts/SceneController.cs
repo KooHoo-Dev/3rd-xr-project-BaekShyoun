@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
-using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
 
 namespace Whack_A_Mole
 {
@@ -26,26 +25,13 @@ namespace Whack_A_Mole
 
         private void SetupUIRays()
         {
-            // 망치를 잡은 손과 UI 선택을 분리하여 플레이 중에도 옵션을 누를 수 있게 함.
-            foreach (var hand in FindObjectsByType<NearFarInteractor>(FindObjectsSortMode.None))
+            // 기존 Near-Far 광선 하나로 망치와 UI를 함께 조작.
+            foreach (var hand in FindObjectsByType<NearFarInteractor>(FindObjectsInactive.Include, FindObjectsSortMode.None))
             {
-                hand.enableUIInteraction = false;
-                GameObject pointer = new GameObject("UI Ray " + hand.handedness);
-                pointer.transform.SetParent(hand.transform.root, false);
-                var ray = pointer.AddComponent<XRRayInteractor>();
-                ray.rayOriginTransform = hand.farInteractionCaster.castOrigin;
-                ray.interactionLayers = 0;
-                ray.enableUIInteraction = true;
-                ray.uiPressInput = hand.uiPressInput;
-                var line = pointer.AddComponent<XRInteractorLineVisual>();
-                line.lineWidth = .002f;
-                line.lineLength = 3;
-                pointer.GetComponent<LineRenderer>().sharedMaterial = uiRayMaterial;
-                var color = new Gradient();
-                color.SetKeys(new[] { new GradientColorKey(new Color(.22f, .87f, 1), 0) },
-                    new[] { new GradientAlphaKey(.6f, 0), new GradientAlphaKey(.2f, 1) });
-                line.validColorGradient = color;
-                line.invalidColorGradient = color;
+                hand.enableUIInteraction = true;
+                hand.blockUIOnInteractableSelection = false;
+                if (hand.GetComponent<HandPointerVisual>() == null)
+                    hand.gameObject.AddComponent<HandPointerVisual>();
             }
         }
 
